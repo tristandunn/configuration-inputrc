@@ -1,0 +1,5 @@
+# Use vi line editing commands.
+set editing-mode vi
+
+# Use vi keymap.
+set keymap vi

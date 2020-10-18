@@ -1,0 +1,24 @@
+#!/bin/bash
+
+CWD="$(pwd)/src"
+NAME="inputrc"
+FILE="$HOME/.$NAME"
+PREFIX="# {{{ plug-ins/$NAME"
+SUFFIX="# }}}"
+
+if [ -L "$FILE" ]; then
+  echo "Failed to install $NAME plug-in: "
+  echo "  $FILE exists as a symbolic link."
+elif [ -f "$FILE" ]; then
+  if grep -q "$PREFIX" "$FILE"; then
+    echo "$PREFIX" >> "$FILE" && \
+      cat "$CWD/$NAME" >> "$FILE" && \
+      echo "$SUFFIX" >> "$FILE" && \
+      echo "Installed $NAME plug-in."
+  fi
+else
+  echo "$PREFIX" > "$FILE" && \
+    cat "$CWD/$NAME" >> "$FILE" && \
+    echo "$SUFFIX" >> "$FILE" && \
+    echo "Installed $NAME plug-in."
+fi

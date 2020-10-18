@@ -1,0 +1,18 @@
+#!/bin/bash
+
+NAME="inputrc"
+FILE="$HOME/.$NAME"
+PREFIX="# {{{ plug-ins\/$NAME"
+SUFFIX="# }}}"
+
+if [ -L "$FILE" ]; then
+  echo "Failed to install $NAME plug-in: "
+  echo "  $FILE exists as a symbolic link."
+elif [ -f "$FILE" ]; then
+  sed "/^$PREFIX/,/^$SUFFIX/d;" "$FILE" > "/tmp/.$NAME" && \
+    mv "/tmp/.$NAME" "$FILE" && \
+    if [ ! -s "$FILE" ]; then \
+      rm "$FILE"; \
+    fi && \
+    echo "Uninstalled $NAME plug-in."
+fi
