@@ -1,9 +1,9 @@
 #!/bin/bash
 
-CWD="$(pwd)/src"
+PWD="$(pwd)"
 NAME="inputrc"
 FILE="$HOME/.$NAME"
-PREFIX="# {{{ plug-ins/$NAME"
+PREFIX="# {{{ $NAME ($PWD)"
 SUFFIX="# }}}"
 
 if [ -L "$FILE" ]; then
@@ -12,13 +12,13 @@ if [ -L "$FILE" ]; then
 elif [ -f "$FILE" ]; then
   if ! grep -q "$PREFIX" "$FILE"; then
     echo "$PREFIX" >> "$FILE" && \
-      cat "$CWD/$NAME" >> "$FILE" && \
+      cat "$PWD/src/$NAME" >> "$FILE" && \
       echo "$SUFFIX" >> "$FILE" && \
       echo "Installed $NAME plug-in."
   fi
 else
   echo "$PREFIX" > "$FILE" && \
-    cat "$CWD/$NAME" >> "$FILE" && \
+    cat "$PWD/src/$NAME" >> "$FILE" && \
     echo "$SUFFIX" >> "$FILE" && \
     echo "Installed $NAME plug-in."
 fi

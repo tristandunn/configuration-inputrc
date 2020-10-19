@@ -1,9 +1,10 @@
 #!/bin/bash
 
+PWD="$(pwd)"
 NAME="inputrc"
 FILE="$HOME/.$NAME"
-PREFIX="# {{{ plug-ins\/$NAME"
-SUFFIX="# }}}"
+PREFIX=$(printf '# {{{ %s (%s)\n' "$NAME" "$PWD" | sed -e 's/[\/&]/\\&/g')
+SUFFIX=$(printf '# }}}\n' | sed -e 's/[\/&]/\\&/g')
 
 if [ -L "$FILE" ]; then
   echo "Failed to install $NAME plug-in: "
