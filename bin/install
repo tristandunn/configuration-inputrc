@@ -10,7 +10,7 @@ if [ -L "$FILE" ]; then
   echo "Failed to install $NAME plug-in: "
   echo "  $FILE exists as a symbolic link."
 elif [ -f "$FILE" ]; then
-  if grep -q "$PREFIX" "$FILE"; then
+  if ! grep -q "$PREFIX" "$FILE"; then
     echo "$PREFIX" >> "$FILE" && \
       cat "$CWD/$NAME" >> "$FILE" && \
       echo "$SUFFIX" >> "$FILE" && \
