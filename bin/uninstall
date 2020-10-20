@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-PWD="$(pwd)"
 NAME="inputrc"
 FILE="$HOME/.$NAME"
 PREFIX=$(printf '# {{{ %s (%s)\n' "$NAME" "$PWD" | sed -e 's/[\/&]/\\&/g')
